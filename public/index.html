@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcaje de Asistencia — Sala de Ventas</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🖐️ Marcaje de Asistencia</h1>
+  <nav>
+    <button data-tab="marcaje" class="tab-btn activo">Marcaje</button>
+    <button data-tab="empleados" class="tab-btn">Empleados</button>
+    <button data-tab="reporte" class="tab-btn">Reporte</button>
+    <button data-tab="config" class="tab-btn">Config. Terminal</button>
+  </nav>
+</header>
+
+<main>
+
+  <section id="tab-marcaje" class="tab activo">
+    <div class="card centrado">
+      <p id="ubicacion-actual" class="ubicacion"></p>
+      <h2>Marcar entrada</h2>
+      <input id="marcaje-documento" placeholder="Número de documento" autofocus>
+      <button id="btn-marcar" class="btn-primario">Marcar con huella</button>
+      <p id="marcaje-mensaje" class="mensaje"></p>
+    </div>
+  </section>
+
+  <section id="tab-empleados" class="tab">
+    <div class="card">
+      <h2>Registrar empleado</h2>
+      <input id="emp-nombre" placeholder="Nombre completo">
+      <input id="emp-documento" placeholder="Documento">
+      <button id="btn-crear-empleado" class="btn-primario">Agregar empleado</button>
+      <p id="empleados-mensaje" class="mensaje"></p>
+    </div>
+    <div class="card">
+      <h2>Personal registrado</h2>
+      <table id="tabla-empleados">
+        <thead><tr><th>Nombre</th><th>Documento</th><th>Huella</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tab-reporte" class="tab">
+    <div class="card">
+      <h2>Marcajes recientes</h2>
+      <table id="tabla-reporte">
+        <thead><tr><th>Fecha y hora</th><th>Empleado</th><th>Documento</th><th>Sala de ventas</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tab-config" class="tab">
+    <div class="card centrado">
+      <h2>Configuración de esta terminal</h2>
+      <p>Define una sola vez el nombre de la sala de ventas donde está instalada esta terminal. Todos los marcajes hechos aquí quedarán asociados a esa ubicación.</p>
+      <input id="config-ubicacion" placeholder="Ej: Sala de Ventas Centro">
+      <button id="btn-guardar-config" class="btn-primario">Guardar</button>
+      <p id="config-mensaje" class="mensaje"></p>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

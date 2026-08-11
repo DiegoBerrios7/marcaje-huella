@@ -1,0 +1,4 @@
+node_modules/
+db/marcaje.sqlite
+db/terminal.json
+*.log
