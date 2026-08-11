@@ -16,8 +16,24 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const PORT = process.env.PORT || 3000;
 const RP_NAME = 'Marcaje Sala de Ventas';
-const RP_ID = process.env.RP_ID || 'localhost';
-const ORIGIN = process.env.ORIGIN || `http://localhost:${PORT}`;
+// Usa RP_ID/ORIGIN si están definidas explícitamente; si no, cae al dominio
+// público que Railway inyecta automáticamente; si no, localhost (dev local).
+const RP_ID = process.env.RP_ID || process.env.RAILWAY_PUBLIC_DOMAIN || 'localhost';
+const ORIGIN = process.env.ORIGIN
+  || (process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : `http://localhost:${PORT}`);
+
+console.log('[config] RP_ID =', RP_ID);
+console.log('[config] ORIGIN =', ORIGIN);
+
+app.get('/api/debug-env', (req, res) => {
+  res.json({
+    RP_ID_usado: RP_ID,
+    ORIGIN_usado: ORIGIN,
+    env_RP_ID: process.env.RP_ID ?? null,
+    env_ORIGIN: process.env.ORIGIN ?? null,
+    env_RAILWAY_PUBLIC_DOMAIN: process.env.RAILWAY_PUBLIC_DOMAIN ?? null,
+  });
+});
 
 // Retos WebAuthn en curso (memoria, suficiente para un prototipo de una sola terminal)
 const retosRegistro = new Map(); // empleadoId -> challenge
